@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:23:52 by ajoliet           #+#    #+#             */
-/*   Updated: 2022/12/29 17:07:08 by ajoliet          ###   ########.fr       */
+/*   Updated: 2022/12/29 17:32:07 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -49,8 +49,13 @@ int	ft_onlydigits(int ac, char **av)
 	return (1);
 }
 
+void	ft_values(int ac, char **av, t_d *d)
+{
+	assigner les valeurs mais ca c'est rapide donc go
+}
+
 void	ft_parsing(int ac, char **av, t_d *d)
 {
-	ft_limited(ac, d);
 	ft_onlydigits(ac, av);
+	ft_values(
 }
