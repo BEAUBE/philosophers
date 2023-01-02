@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:23:52 by ajoliet           #+#    #+#             */
-/*   Updated: 2022/12/29 17:32:07 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/02 20:39:41 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,9 @@ int	ft_onlydigits(int ac, char **av)
 
 	arg = 1;
 	i = 0;
-	while (av[arg][i] && arg < ac)
+	if (ac == 1)
+		return (0);
+	while (arg < ac && av[arg][i])
 	{
 		if (ft_isdigit(av[arg][i]))
 			i++;
@@ -51,11 +53,19 @@ int	ft_onlydigits(int ac, char **av)
 
 void	ft_values(int ac, char **av, t_d *d)
 {
-	assigner les valeurs mais ca c'est rapide donc go
+	ft_limited(ac, d);
+	d->phi_nbr = ft_atoi(av[1]);
+	d->death_time = ft_atoi(av[2]);
+	d->meal_time = ft_atoi(av[3]);
+	d->sleep_time = ft_atoi(av[4]);
+	if (d->limited)
+		d->meal_nbr = ft_atoi(av[5]);
 }
 
 void	ft_parsing(int ac, char **av, t_d *d)
 {
-	ft_onlydigits(ac, av);
-	ft_values(
+	if (ft_onlydigits(ac, av))
+		ft_values(ac, av, d);
+	else
+		write(1, "Error\n", 7);
 }
