@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/01 14:55:18 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:36:05 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,7 @@ typedef struct s_philo
 {
 	pthread_t	id_thread;
 	t_d	*d;
+	int test;
 	int fork;
 	int *next_fork;
 }	t_philo;
@@ -46,7 +47,9 @@ typedef struct	s_main
 	t_d	d;
 }	t_main;
 
+void	ft_start_time(t_d *d);
 void	ft_parsing(int ac, char **av, t_d *d);
+void	ft_init(t_main *main);
 int		ft_atoi(char *nptr);
 
 #endif

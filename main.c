@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:08:03 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/02 20:41:10 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/02 23:58:47 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ int	main(int ac, char **av)
 	t_main	main;
 
 	ft_parsing(ac, av, &main.d);
+	ft_start_time(&main.d);
+	ft_init(&main);
 	(void)ac;
 	(void)av;
 	return (0);
@@ -29,3 +31,5 @@ int	main(int ac, char **av)
 		printf(", meal_nbr = %i", main.d.meal_nbr);
 	printf(" \n");
 */
+
+//printf("start_time : sec = %i, usec = %i \n", main.d.start_sec, main.d.start_usec);
