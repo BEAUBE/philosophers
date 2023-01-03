@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_utils.c                                         :+:      :+:    :+:   */
+/*   ft_utils_parsing.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 14:50:16 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/01 15:34:12 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/03 16:47:37 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 int ft_atoi(char *nptr)
 {
 	int i;
-	int	result;
+	long long int	result;
 	int minus;
 
 	minus = 1;
@@ -23,5 +23,7 @@ int ft_atoi(char *nptr)
 	i = 0;
 	while (nptr[i])
 		result = result * 10 + nptr[i++] - '0';
+	if (result < -2147483647 || result > 2147483647)
+		return (-1);
 	return (result);
 }

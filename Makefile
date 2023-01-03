@@ -6,7 +6,7 @@
 #    By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 14:57:08 by ajoliet           #+#    #+#              #
-#    Updated: 2023/01/02 23:37:02 by ajoliet          ###   ########.fr        #
+#    Updated: 2023/01/03 14:48:32 by ajoliet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,6 +15,7 @@ PHI_SRCS = main.c \
 		   parsing.c \
 		   time.c \
 		   ft_init.c \
+		   philosophers.c \
 		   ft_utils_parsing.c
 PHI_OBJS = $(PHI_SRCS:.c=.o)
 RM = rm

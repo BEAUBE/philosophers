@@ -1,31 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_init.c                                          :+:      :+:    :+:   */
+/*   philosophers.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/02 20:56:33 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/03 16:50:44 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/03 14:43:10 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/03 17:35:00 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-void	ft_init(t_main *main)
+void	*ft_philo(void *ptr)
 {
-	int	tmp;
+	static int	id_phi_nbr_tmp;
+	int id_phi_nbr;
 
-	tmp = main->d.phi_nbr;
-	while (tmp)
-	{
-		tmp--;
-		pthread_create(&main->philo[tmp].id_thread, NULL, &ft_philo, &main->d);
-	}
-	tmp = main->d.phi_nbr;
-	while (tmp)
-	{
-		tmp --;
-		pthread_join(main->philo[tmp].id_thread, NULL);
-	}
+	id_phi_nbr = id_phi_nbr_tmp;
+	id_phi_nbr_tmp++;
+	printf("oui, id_phi_nbr = %i \n", id_phi_nbr);
+	sleep(1);
+	printf("oui, id_phi_nbr = %i \n", id_phi_nbr);
+	return (ptr);
 }
+

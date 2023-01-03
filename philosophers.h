@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/02 23:36:05 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/03 15:01:31 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_d
 	int	sleep_time;
 	int	meal_nbr;
 	int	limited;
+	int parsvalid;
 }	t_d;
 
 typedef struct s_philo
@@ -47,6 +48,7 @@ typedef struct	s_main
 	t_d	d;
 }	t_main;
 
+void	*ft_philo(void *ptr);
 void	ft_start_time(t_d *d);
 void	ft_parsing(int ac, char **av, t_d *d);
 void	ft_init(t_main *main);
