@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 14:50:16 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 15:10:55 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/06 20:30:45 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,9 +37,7 @@ int ft_atoi(char *nptr)
 {
 	int i;
 	long long int	result;
-	int minus;
 
-	minus = 1;
 	result = 0;
 	i = 0;
 	while (nptr[i])
