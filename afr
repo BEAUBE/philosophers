@@ -1,0 +1,19 @@
+setup phi routine 
+si phi_id %2
+	sleep (meal time / 2) * 1000
+ft_eat
+ft_sleep
+ft_think
+
+ft_eat
+mutex locks(m_fork & m_next_fork)
+write (fork taken)
+write (eating)
+look for time and sleep (meal_time*)
+mutex unlocks(m_fork & m_next_fork)
+
+ft_sleep
+look for time and sleep (sleep_time*)
+
+
+*prendre le start_time et soustraire le temps de repas (a paufiner clairement)

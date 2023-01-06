@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:08:03 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/03 17:04:45 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/04 14:17:39 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,9 @@ int	main(int ac, char **av)
 	printf("parsvalid = %i \n", main.d.parsvalid);
 	if (main.d.parsvalid)
 	{
-		ft_start_time(&main.d);
+//		ft_start_time(&main.d);
 		ft_init(&main);
 	}
-	(void)ac;
-	(void)av;
 	return (0);
 }
 
