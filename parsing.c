@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:23:52 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 16:02:46 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:44:29 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,8 @@ int	ft_values(int ac, char **av, t_d *d)
 void	ft_init_mutex_d(t_d *d)
 {
 	pthread_mutex_init(&d->m_write, NULL);
-	pthread_mutex_init(&d->m_time, NULL);
+	pthread_mutex_init(&d->m_start_usec, NULL);
+	pthread_mutex_init(&d->m_start_sec, NULL);
 	pthread_mutex_init(&d->m_death_time, NULL);
 	pthread_mutex_init(&d->m_meal_time, NULL);
 	pthread_mutex_init(&d->m_sleep_time, NULL);

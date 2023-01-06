@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/02 20:56:33 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 09:32:29 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/06 17:27:59 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,16 +34,17 @@ void	init_philo_data(t_main *main)
 void	ft_init(t_main *main)
 {
 	int	tmp;
+	int	phinbr;
 
+	phinbr = main->d.phi_nbr;
 	tmp = main->d.phi_nbr;
 	init_philo_data(main);
 	ft_start_time(&main->d);
-	while (tmp)
+	while (phinbr)
 	{
-		tmp--;
-		pthread_create(&main->philo[tmp].id_thread, NULL, &ft_philo, &main->philo[tmp]);
+		phinbr--;
+		pthread_create(&main->philo[phinbr].id_thread, NULL, &ft_philo, &main->philo[phinbr]);
 	}
-	tmp = main->d.phi_nbr;
 	while (tmp)
 	{
 		tmp--;

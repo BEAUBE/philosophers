@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 15:13:28 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/06 16:40:11 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,14 @@
 typedef struct	s_d
 {
 	pthread_mutex_t	m_write;
-	pthread_mutex_t	m_time;
+	pthread_mutex_t	m_start_sec;
+	pthread_mutex_t	m_start_usec;
 	pthread_mutex_t	m_death_time;
 	pthread_mutex_t	m_meal_time;
 	pthread_mutex_t	m_sleep_time;
 	pthread_mutex_t	m_meal_nbr;
 	pthread_mutex_t	m_limited;
-	long long		start_sec;
+	int				start_sec;
 	int 			start_usec;
 	int 			phi_nbr;
 	int	 			death_time;
@@ -58,6 +59,7 @@ void	ft_parsing(int ac, char **av, t_d *d);
 void	ft_init(t_main *main);
 int		ft_onlydigits(int ac, char **av);
 int		ft_atoi(char *nptr);
-int		gettime(long long start_sec, int start_usec);
+int		gettime(t_d *d);
+int		get_mutex_data(int *var, pthread_mutex_t *mutex);
 
 #endif
