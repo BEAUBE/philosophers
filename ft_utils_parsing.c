@@ -6,11 +6,32 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/01 14:50:16 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/03 16:47:37 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/06 15:10:55 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
+
+int ft_onlydigits(int ac, char **av)
+{
+    int arg;
+    int i;
+
+    arg = 1;
+    i = 0;
+    if (ac == 1)
+        return (0);
+    while (arg < ac && av[arg][i])
+    {
+        if (av[arg][i] >= '0' && av[arg][i] <= '9')
+            i++;
+        else
+            return (0);
+        if (!av[arg][i])
+            arg++;
+    }
+    return (1);
+}
 
 int ft_atoi(char *nptr)
 {
