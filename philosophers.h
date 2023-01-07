@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 16:40:11 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/07 14:45:38 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ typedef struct	s_d
 	pthread_mutex_t	m_sleep_time;
 	pthread_mutex_t	m_meal_nbr;
 	pthread_mutex_t	m_limited;
+	pthread_mutex_t	m_dead;
 	int				start_sec;
 	int 			start_usec;
 	int 			phi_nbr;
@@ -37,6 +38,7 @@ typedef struct	s_d
 	int				meal_nbr;
 	int				limited;
 	int 			parsvalid;
+	int				dead;
 }	t_d;
 
 typedef struct s_philo
@@ -45,6 +47,9 @@ typedef struct s_philo
 	pthread_t		id_thread;
 	pthread_mutex_t	m_fork;
 	pthread_mutex_t *m_next_fork;
+	pthread_mutex_t	m_death;
+	int				death;
+	int				start_prev_meal;
 }	t_philo;
 
 typedef struct	s_main

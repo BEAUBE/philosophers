@@ -6,11 +6,11 @@
 #    By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/12/29 14:57:08 by ajoliet           #+#    #+#              #
-#    Updated: 2023/01/06 16:21:42 by ajoliet          ###   ########.fr        #
+#    Updated: 2023/01/07 09:22:10 by ajoliet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-PHI = philosophers
+NAME = philosophers
 PHI_SRCS = main.c \
 		   parsing.c \
 		   time.c \
@@ -22,23 +22,23 @@ PHI_OBJS = $(PHI_SRCS:.c=.o)
 RM = rm
 CLGF = clang -g3 -Wall -Wextra -Werror -pthread
 
-all: $(PHI)
+all: $(NAME)
 
-$(PHI): $(PHI_OBJS)
-	$(CLGF) -o $(PHI) $(PHI_SRCS)
+$(NAME): $(PHI_OBJS)
+	$(CLGF) -o $(NAME) $(PHI_SRCS)
 
 clean:
 	$(RM) $(PHI_OBJS)
 
 fclean: clean
-	$(RM) $(PHI)
+	$(RM) $(NAME)
 
 exec: all
-	./$(PHI) 4 420 100 100
+	./$(NAME) 4 420 100 100
 
 execl: all
-	./$(PHI) 4 420 100 100 3
+	./$(NAME) 4 420 100 100 3
 
-re: fclean $(PHI)
+re: fclean $(NAME)
 
 .PHONY: all fclean clean re
