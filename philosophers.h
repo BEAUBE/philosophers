@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/10 13:19:14 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:25:28 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,7 @@ typedef struct	s_d
 	pthread_mutex_t	m_limited;
 	pthread_mutex_t	m_dead;
 	pthread_mutex_t	m_id_dead_philo;
+	pthread_mutex_t	m_id_phi_tmp;
 	int				start_sec;
 	int 			start_usec;
 	int 			phi_nbr;
@@ -50,6 +51,9 @@ typedef struct s_philo
 	pthread_mutex_t	m_fork;
 	pthread_mutex_t *m_next_fork;
 	pthread_mutex_t	m_death;
+	pthread_mutex_t	m_start_prev_meal;
+	pthread_mutex_t m_id_philo;
+	int				id_philo;
 	int				death;
 	int				start_prev_meal;
 }	t_philo;
@@ -61,6 +65,7 @@ typedef struct	s_main
 }	t_main;
 
 void	*ft_philo(void *ptr);
+void 	*checker(void *arg);
 void	ft_start_time(t_d *d);
 void	ft_parsing(int ac, char **av, t_d *d);
 void	ft_init(t_main *main);

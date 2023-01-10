@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:23:52 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/06 16:44:29 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/10 16:34:53 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,9 @@ void	ft_init_mutex_d(t_d *d)
 	pthread_mutex_init(&d->m_sleep_time, NULL);
 	pthread_mutex_init(&d->m_meal_nbr, NULL);
 	pthread_mutex_init(&d->m_limited, NULL);
+	pthread_mutex_init(&d->m_dead, NULL);
+	pthread_mutex_init(&d->m_id_dead_philo, NULL);
+	pthread_mutex_init(&d->m_id_phi_tmp, NULL);
 }
 
 void	ft_parsing(int ac, char **av, t_d *d)
