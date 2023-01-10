@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/07 14:45:38 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/10 11:19:24 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,6 +62,7 @@ void	*ft_philo(void *ptr);
 void	ft_start_time(t_d *d);
 void	ft_parsing(int ac, char **av, t_d *d);
 void	ft_init(t_main *main);
+void	philo_printf(int id_phi, char action, t_d *d);
 int		ft_onlydigits(int ac, char **av);
 int		ft_atoi(char *nptr);
 int		gettime(t_d *d);

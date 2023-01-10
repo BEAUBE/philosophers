@@ -6,7 +6,7 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:43:10 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/07 16:15:58 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/10 11:33:00 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,17 +17,16 @@ int	ft_eat(t_philo *philo, int id_phi)
 	int time;
 
 	pthread_mutex_lock(philo->m_next_fork);
+	philo_printf(id_phi, 'f', philo->d);
 	pthread_mutex_lock(&philo->m_fork);
+	philo_printf(id_phi, 'f', philo->d);
 	time = gettime(philo->d);
-	pthread_mutex_lock(&philo->d->m_write);
-	printf("%i %i has taken a fork\n", time, id_phi); 
-	printf("%i %i is eating\n", time, id_phi);
-	pthread_mutex_unlock(&philo->d->m_write);
 	philo->start_prev_meal = time;
 /*	if (get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time) 
 			> get_mutex_data(&philo->d->death_time, &philo->d->m_death_time))
 		usleep(get_mutex_data(&philo->d->death_time, &philo->d->m_death_time));
 	else*/
+	philo_printf(id_phi, 'e', philo->d);
 		usleep(get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time));
 	pthread_mutex_unlock(&philo->m_fork);
 	pthread_mutex_unlock(philo->m_next_fork);
@@ -36,24 +35,14 @@ int	ft_eat(t_philo *philo, int id_phi)
 
 int	ft_sleep(t_philo *philo, int id_phi)
 {
-	int time;
-
-	time = gettime(philo->d);
-	pthread_mutex_lock(&philo->d->m_write);
-	printf("%i %i is sleeping\n", time, id_phi);
-	pthread_mutex_unlock(&philo->d->m_write);
+	philo_printf(id_phi, 's', philo->d);
 	usleep(get_mutex_data(&philo->d->sleep_time, &philo->d->m_sleep_time));
 	return (1);
 }
 
 int	ft_think(t_philo *philo, int id_phi)
 {
-	int	time;
-
-	time = gettime(philo->d);
-	pthread_mutex_lock(&philo->d->m_write);
-	printf("%i %i is thinking\n", time, id_phi);
-	pthread_mutex_unlock(&philo->d->m_write);
+	philo_printf(id_phi, 't', philo->d);
 	return (1);
 }
 
