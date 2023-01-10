@@ -6,20 +6,31 @@
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/01/03 14:43:10 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/10 11:33:00 by ajoliet          ###   ########.fr       */
+/*   Updated: 2023/01/10 15:28:00 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
+void	*wait_meal(void *arg)
+{
+	t_philo *philo;
+
+	philo = (t_philo *)arg;
+	usleep(get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time));
+	return (arg);
+}
+
 int	ft_eat(t_philo *philo, int id_phi)
 {
 	int time;
+	pthread_t	id_thread;
 
 	pthread_mutex_lock(philo->m_next_fork);
 	philo_printf(id_phi, 'f', philo->d);
 	pthread_mutex_lock(&philo->m_fork);
 	philo_printf(id_phi, 'f', philo->d);
+	pthread_create(&id_thread, NULL, &wait_meal, philo);
 	time = gettime(philo->d);
 	philo->start_prev_meal = time;
 /*	if (get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time) 
@@ -27,7 +38,8 @@ int	ft_eat(t_philo *philo, int id_phi)
 		usleep(get_mutex_data(&philo->d->death_time, &philo->d->m_death_time));
 	else*/
 	philo_printf(id_phi, 'e', philo->d);
-		usleep(get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time));
+	pthread_join(id_thread, NULL);
+	//	usleep(get_mutex_data(&philo->d->meal_time, &philo->d->m_meal_time));
 	pthread_mutex_unlock(&philo->m_fork);
 	pthread_mutex_unlock(philo->m_next_fork);
 	return (1);
