@@ -5,44 +5,47 @@
 #                                                     +:+ +:+         +:+      #
 #    By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
-#    Created: 2022/12/29 14:57:08 by ajoliet           #+#    #+#              #
-#    Updated: 2023/01/10 16:03:56 by ajoliet          ###   ########.fr        #
+#    Created: 2023/01/11 13:38:48 by ajoliet           #+#    #+#              #
+#    Updated: 2023/01/11 14:28:57 by ajoliet          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = philosophers
-PHI_SRCS = main.c \
-		   parsing.c \
-		   time.c \
-		   ft_init.c \
-		   philosophers.c \
-		   philo_utils.c \
-		   checker.c \
-		   ft_utils_parsing.c
-PHI_OBJS = $(PHI_SRCS:.c=.o)
-RM = rm
-CLGF = clang -g3 -Wall -Wextra -Werror -pthread
+NAME=philo
+CC=gcc
+CFLAGS=-Wall -Wextra -Werror -g3 -pthread
+SRC_C=	ft_utils.c \
+		parsing.c \
+		finish.c \
+		init.c \
+		routine.c \
+		ft_say.c \
+		ft_gettimestamp.c \
+		checker.c \
+		routine_utils.c \
+		main.c
+OBJ_C= $(SRC_C:%.c=%.o)
 
-all: $(NAME)
+$(NAME):	$(OBJ_C)
+	$(CC) $(CFLAGS) $(OBJ_C) -o $(NAME)
 
-$(NAME): $(PHI_OBJS)
-	$(CLGF) -o $(NAME) $(PHI_SRCS)
+all:	$(NAME)
+
+%.o		: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(PHI_OBJS)
+	rm $(OBJ_C)
 
 fclean: clean
-	$(RM) $(NAME)
+	rm $(NAME)
 
-exec: all
-	./$(NAME) 4 420 100 100
+exec: re
+	./philosophers 4 420 100 100
 
-execl: all
-	./$(NAME) 4 420 100 100 3
+execl: re
+	./philosophers 4 420 100 100 3
 
-execd: all
-	./$(NAME) 4 100 100 100 3
+execd: re
+	./philosophers 4 150 100 100 3
 
 re: fclean $(NAME)
-
-.PHONY: all fclean clean re

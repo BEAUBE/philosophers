@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   routine_utils.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:28:32 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/11 08:28:34 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 06:44:45 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 10:53:17 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+int	stop_simu(t_data *data)
 {
-	t_data	data;
-
-	if (parsing(ac - 1, av + 1, &data))
+	if (get_mutex_var(&data->nb_philo_ate, &data->m_nb_philo_ate)
+		< data->philo_nbr)
 	{
-		printf("Error\n");
-		return (1);
+		if (!get_mutex_var(&data->is_philo_dead, &data->m_is_philo_dead))
+			return (1);
 	}
-	ft_init(&data);
-	destroy_mutex(data);
 	return (0);
+}
+
+void	ft_one_philo(t_philo *philo)
+{
+	take_fork(philo, &philo->m_fork);
+	pthread_mutex_unlock(&philo->m_fork);
 }

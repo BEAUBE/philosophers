@@ -1,27 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_gettimestamp.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:28:32 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/11 08:28:34 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 08:20:55 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 08:21:18 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
-{
-	t_data	data;
+unsigned int	get_time_stamp(void)
+{	
+	struct timeval	value;
 
-	if (parsing(ac - 1, av + 1, &data))
-	{
-		printf("Error\n");
-		return (1);
-	}
-	ft_init(&data);
-	destroy_mutex(data);
-	return (0);
+	gettimeofday(&value, NULL);
+	return (value.tv_sec * 1000 + value.tv_usec / 1000);
 }

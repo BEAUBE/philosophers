@@ -5,84 +5,36 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:23:52 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/10 16:34:53 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 08:29:57 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 14:34:32 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	ft_limited(int ac, t_d *d)
+int	parsing(int ac, char **av, t_data *data)
 {
-	if (ac == 5)
-		d->limited = 0;
-	else if (ac == 6)
-		d->limited = 1;
-	else
-		return (0);
-	return (1);
-}
-
-int	verifyvalues(t_d *d)
-{
-	if (d->phi_nbr <= 0)
-		return (0);
-	if (d->death_time <= 0)
-		return (0);
-	if (d->meal_time <= 0)
-		return (0);
-	if (d->sleep_time <= 0)
-		return (0);
-	return (1);
-}
-
-int	ft_values(int ac, char **av, t_d *d)
-{
-	if (ft_limited(ac, d))
-	{
-		d->phi_nbr = ft_atoi(av[1]);
-		d->death_time = ft_atoi(av[2]) * 1000;
-		d->meal_time = ft_atoi(av[3]) * 1000;
-		d->sleep_time = ft_atoi(av[4]) * 1000;
-	}
-	if (d->limited)
-		d->meal_nbr = ft_atoi(av[5]);
-	if (verifyvalues(d))
+	if (!(ac == 4 || ac == 5))
 		return (1);
-	return (0);
-}
-
-void	ft_init_mutex_d(t_d *d)
-{
-	pthread_mutex_init(&d->m_write, NULL);
-	pthread_mutex_init(&d->m_start_usec, NULL);
-	pthread_mutex_init(&d->m_start_sec, NULL);
-	pthread_mutex_init(&d->m_death_time, NULL);
-	pthread_mutex_init(&d->m_meal_time, NULL);
-	pthread_mutex_init(&d->m_sleep_time, NULL);
-	pthread_mutex_init(&d->m_meal_nbr, NULL);
-	pthread_mutex_init(&d->m_limited, NULL);
-	pthread_mutex_init(&d->m_dead, NULL);
-	pthread_mutex_init(&d->m_id_dead_philo, NULL);
-	pthread_mutex_init(&d->m_id_phi_tmp, NULL);
-}
-
-void	ft_parsing(int ac, char **av, t_d *d)
-{
-	if (ft_onlydigits(ac, av))
+	data->philo_nbr = ft_atoi(av[0]);
+	if (data->philo_nbr < 1 || data->philo_nbr > MAX_PHILO)
+		return (1);
+	data->death_time = ft_atoi(av[1]);
+	if (data->death_time < 1)
+		return (1);
+	data->meal_time = ft_atoi(av[2]);
+	if (data->meal_time < 1)
+		return (1);
+	data->sleep_time = ft_atoi(av[3]);
+	if (data->sleep_time < 1)
+		return (1);
+	if (ac == 5)
 	{
-		if (ft_values(ac, av, d))
-			d->parsvalid = 1;
-		else
-		{
-			d->parsvalid = 1;
-			write(1, "Error\n", 7);
-		}
+		data->max_meals = ft_atoi(av[4]);
+		if (data->max_meals <= 0)
+			return (1);
 	}
 	else
-	{
-		d->parsvalid = 0;
-		write(1, "Error\n", 7);
-	}
-	ft_init_mutex_d(d);
+		data->max_meals = -1;
+	return (0);
 }

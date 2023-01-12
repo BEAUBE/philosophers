@@ -1,27 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   finish.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:28:32 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/11 08:28:34 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 08:20:16 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 08:20:34 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+int	destroy_mutex(t_data data)
 {
-	t_data	data;
+	int	i;
 
-	if (parsing(ac - 1, av + 1, &data))
+	i = 0;
+	pthread_mutex_destroy(&data.m_nb_philo_ate);
+	pthread_mutex_destroy(&data.m_print);
+	pthread_mutex_destroy(&data.m_is_philo_dead);
+	while (i < data.philo_nbr)
 	{
-		printf("Error\n");
-		return (1);
+		pthread_mutex_destroy(&data.philo[i].m_last_meal_ts);
+		pthread_mutex_destroy(&data.philo[i].m_fork);
+		i++;
 	}
-	ft_init(&data);
-	destroy_mutex(data);
 	return (0);
 }

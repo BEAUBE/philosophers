@@ -5,74 +5,64 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/12/29 15:01:24 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/10 16:25:28 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 08:33:26 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 13:57:59 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILOSOPHERS_H
 # define PHILOSOPHERS_H
 
-# include <unistd.h>
 # include <stdio.h>
 # include <pthread.h>
+# include <stdlib.h>
 # include <sys/time.h>
+# include <unistd.h>
 
-typedef struct	s_d
-{
-	pthread_mutex_t	m_write;
-	pthread_mutex_t	m_start_sec;
-	pthread_mutex_t	m_start_usec;
-	pthread_mutex_t	m_death_time;
-	pthread_mutex_t	m_meal_time;
-	pthread_mutex_t	m_sleep_time;
-	pthread_mutex_t	m_meal_nbr;
-	pthread_mutex_t	m_limited;
-	pthread_mutex_t	m_dead;
-	pthread_mutex_t	m_id_dead_philo;
-	pthread_mutex_t	m_id_phi_tmp;
-	int				start_sec;
-	int 			start_usec;
-	int 			phi_nbr;
-	int	 			death_time;
-	int				meal_time;
-	int				sleep_time;
-	int				meal_nbr;
-	int				limited;
-	int 			parsvalid;
-	int				dead;
-	int				id_dead_philo;
-}	t_d;
+# define MAX_PHILO		1024
 
 typedef struct s_philo
 {
-	t_d				*d;
-	pthread_t		id_thread;
+	int				id;
+	int				nb_meal;
+	int				meal_count;
 	pthread_mutex_t	m_fork;
-	pthread_mutex_t *m_next_fork;
-	pthread_mutex_t	m_death;
-	pthread_mutex_t	m_start_prev_meal;
-	pthread_mutex_t m_id_philo;
-	int				id_philo;
-	int				death;
-	int				start_prev_meal;
+	pthread_mutex_t	*m_next_fork;
+	pthread_t		thread;
+	pthread_mutex_t	m_last_meal_ts;
+	unsigned int	last_meal_ts;
+	struct s_data	*data;
 }	t_philo;
 
-typedef struct	s_main
+typedef struct s_data
 {
-	t_philo	philo[1024];
-	t_d		d;
-}	t_main;
+	int					philo_nbr;
+	int					death_time;
+	int					meal_time;
+	int					sleep_time;
+	int					max_meals;
+	int					nb_philo_ate;
+	int					is_philo_dead;
+	unsigned int		begin_ts;
+	pthread_mutex_t		m_is_philo_dead;
+	pthread_mutex_t		m_print;
+	pthread_mutex_t		m_nb_philo_ate;	
+	t_philo				philo[MAX_PHILO];
+}						t_data;
 
-void	*ft_philo(void *ptr);
-void 	*checker(void *arg);
-void	ft_start_time(t_d *d);
-void	ft_parsing(int ac, char **av, t_d *d);
-void	ft_init(t_main *main);
-void	philo_printf(int id_phi, char action, t_d *d);
-int		ft_onlydigits(int ac, char **av);
-int		ft_atoi(char *nptr);
-int		gettime(t_d *d);
-int		get_mutex_data(int *var, pthread_mutex_t *mutex);
+int				ft_atoi(char *str);
+int				parsing(int ac, char **av, t_data *data);
+int				destroy_mutex(t_data data);
+int				stop_simu(t_data *data);
+void			ft_init(t_data *data);
+int				get_mutex_var(int *var, pthread_mutex_t *mutex);
+unsigned int	get_time_stamp(void);
+void			*routine(void *arg);
+void			*checker(void *arg);
+void			ft_say(char *str, t_philo *philo);
+void			ft_one_philo(t_philo *philo);
+void			increment_mutex_var(int *var, pthread_mutex_t *mutex);
+void			take_fork(t_philo *philo, pthread_mutex_t *m_fork);
+void			set_mtx_var(int *var, pthread_mutex_t *mtx, int val);
 
 #endif

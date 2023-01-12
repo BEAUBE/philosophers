@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_say.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ajoliet <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2023/01/11 08:28:32 by ajoliet           #+#    #+#             */
-/*   Updated: 2023/01/11 08:28:34 by ajoliet          ###   ########.fr       */
+/*   Created: 2023/01/11 08:21:41 by ajoliet           #+#    #+#             */
+/*   Updated: 2023/01/11 08:24:00 by ajoliet          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philosophers.h"
 
-int	main(int ac, char **av)
+void	ft_say(char *str, t_philo *philo)
 {
-	t_data	data;
-
-	if (parsing(ac - 1, av + 1, &data))
-	{
-		printf("Error\n");
-		return (1);
-	}
-	ft_init(&data);
-	destroy_mutex(data);
-	return (0);
+	pthread_mutex_lock(&philo->data->m_print);
+	if (!get_mutex_var(&philo->data->is_philo_dead,
+			&philo->data->m_is_philo_dead))
+		printf("%u %i %s\n", get_time_stamp()
+			- philo->data->begin_ts, philo->id + 1, str);
+	pthread_mutex_unlock(&philo->data->m_print);
 }
